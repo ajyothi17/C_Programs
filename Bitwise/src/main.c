@@ -25,7 +25,9 @@ int main(void)
                "4. Bit toggle\n"
                "5. Test bit set or not\n"
                "6. Rotate bits\n"
-			   "7. exit\n"
+			   "7. Count set bits\n"
+			   "8. Count clear bits\n"
+			   "9. exit\n"
 			   "enter your choice: ");
 
     	if(NULL == (fgets(input, SIZE, stdin)))
@@ -343,7 +345,39 @@ int main(void)
 
 					break;
 
-			case 7: 
+			case 7:
+    				printf("enter a num: ");
+    				if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+				    num1 = atoi(input);
+					
+					printf("Given num: ");
+					decimal_to_binary(num1);
+
+					printf("no. of set bits in given num: %d\n", count_bit_set(num1));
+
+					break;
+
+			case 8:
+    				printf("enter a num: ");
+    				if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+				    num1 = atoi(input);
+					
+					printf("Given num: ");
+					decimal_to_binary(num1);
+
+					printf("no. of set bits in given num: %d\n", count_bit_clear(num1));
+
+					break;
+					
+			case 9: 
 					run = 0;
 					break;
 
