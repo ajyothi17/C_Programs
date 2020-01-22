@@ -27,7 +27,11 @@ int main(void)
                "6. Rotate bits\n"
 			   "7. Count set bits\n"
 			   "8. Count clear bits\n"
-			   "9. exit\n"
+			   "9. Count leading set bits\n"
+			   "10. Count leading clear bits\n"
+			   "11. Count trailing clear bits\n"
+			   "12. Count trailing set bits\n"
+			   "13. exit\n"
 			   "enter your choice: ");
 
     	if(NULL == (fgets(input, SIZE, stdin)))
@@ -377,7 +381,71 @@ int main(void)
 
 					break;
 					
-			case 9: 
+			case 9:
+    				printf("enter a num: ");
+    				if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+				    num1 = atoi(input);
+					
+					printf("Given num: ");
+					decimal_to_binary(num1);
+
+					printf("no. of leading set bits in given num: %d\n", count_leading_set_bits(num1));
+
+					break;
+
+			case 10:
+    				printf("enter a num: ");
+    				if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+				    num1 = atoi(input);
+					
+					printf("Given num: ");
+					decimal_to_binary(num1);
+
+					printf("no. of leading clear bits in given num: %d\n", count_leading_clear_bits(num1));
+
+					break;
+
+			case 11:
+    				printf("enter a num: ");
+    				if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+				    num1 = atoi(input);
+					
+					printf("Given num: ");
+					decimal_to_binary(num1);
+
+					printf("no. of leading clear bits in given num: %d\n", count_trailing_clear_bits(num1));
+
+					break;
+
+			case 12:
+    				printf("enter a num: ");
+    				if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+				    num1 = atoi(input);
+					
+					printf("Given num: ");
+					decimal_to_binary(num1);
+
+					printf("no. of leading clear bits in given num: %d\n", count_trailing_set_bits(num1));
+
+					break;
+
+			case 13: 
 					run = 0;
 					break;
 

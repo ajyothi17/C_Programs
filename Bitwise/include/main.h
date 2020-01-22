@@ -26,4 +26,8 @@ uint left_rotate_n_bits(uint num, uint no_of_bits);
 uint right_rotate_n_bits(uint num, uint no_of_bits);
 uint count_bit_set(uint num);
 uint count_bit_clear(uint num);
+uint count_leading_set_bits(uint num);
+uint count_trailing_set_bits(uint num);
+uint count_leading_clear_bits(uint num);
+uint count_trailing_clear_bits(uint num);
 #endif
