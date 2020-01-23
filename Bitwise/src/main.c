@@ -31,7 +31,9 @@ int main(void)
 			   "10. Count leading clear bits\n"
 			   "11. Count trailing clear bits\n"
 			   "12. Count trailing set bits\n"
-			   "13. exit\n"
+			   "13. Max/min of two nums\n"
+			   "14. Set/Clear bits\n"
+			   "15. exit\n"
 			   "enter your choice: ");
 
     	if(NULL == (fgets(input, SIZE, stdin)))
@@ -444,8 +446,205 @@ int main(void)
 					printf("no. of leading clear bits in given num: %d\n", count_trailing_set_bits(num1));
 
 					break;
-
+			
 			case 13: 
+					printf("enter num1: ");
+					if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+					num1 = atoi(input);
+
+					printf("enter num2: ");
+					if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+					num2 = atoi(input);
+
+					printf("maximum of given num %d\n", MAX(num1, num2));
+					printf("minimum of given num %d\n", MIN(num1, num2));
+
+					break;
+
+			case 14:
+					printf("1. Clear the right most set bit\n"
+						   "2. Clear the left most set bit\n"
+						   "3. Set the right most clear bit\n"
+						   "4. Set the left most clear bit\n"
+						   "5. Set bit from pos 's' to 'd'\n"
+						   "6. Clear bit from pos 's' to 'd'\n"
+						   "7. Toggle bit from pos 's' to 'd'\n"
+						   "8. Exit\n"
+						   "enter your choice: ");
+
+					printf("enter a num: ");
+					if(NULL == (fgets(input, SIZE, stdin)))
+					{
+						printf("couldn't read the input\n");
+						return EXIT_FAILURE;
+					}
+					choice = atoi(input);
+
+					switch(choice)
+					{
+						case 1:
+								printf("enter a num: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								num1 = atoi(input);
+
+								num1 = CLEAR_RIGHTMOST_BIT(num1);
+								decimal_to_binary(num1);
+
+								break;
+
+						case 2:
+								printf("enter a num: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								num1 = atoi(input);
+
+								num1 = CLEAR_LEFTMOST_BIT(num1);
+								decimal_to_binary(num1);
+
+								break;
+
+						case 3:
+								printf("enter a num: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								num1 = atoi(input);
+
+								num1 = SET_RIGHTMOST_BIT(num1);
+								decimal_to_binary(num1);
+
+								break;
+
+						case 4:
+								printf("enter a num: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								num1 = atoi(input);
+
+								num1 = SET_LEFTMOST_BIT(num1);
+								decimal_to_binary(num1);
+
+								break;
+
+						case 5:
+								printf("enter a num: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								num1 = atoi(input);
+
+								printf("enter src_bit: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								src_bit = atoi(input);
+								
+								printf("enter dest_bit: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								dest_bit = atoi(input);
+
+								SET_BITS(num1, src_bit, dest_bit);
+								decimal_to_binary(num1);
+
+								break;
+
+						case 6:
+								printf("enter a num: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								num1 = atoi(input);
+
+								printf("enter src_bit: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								src_bit = atoi(input);
+								
+								printf("enter dest_bit: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								dest_bit = atoi(input);
+
+								CLEAR_BITS(num1, src_bit, dest_bit);
+								decimal_to_binary(num1);
+
+								break;
+
+						case 7:
+								printf("enter a num: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								num1 = atoi(input);
+
+								printf("enter src_bit: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								src_bit = atoi(input);
+								
+								printf("enter dest_bit: ");
+								if(NULL == (fgets(input, SIZE, stdin)))
+								{
+									printf("couldn't read the input\n");
+									return EXIT_FAILURE;
+								}
+								dest_bit = atoi(input);
+
+								TOGGLE_BITS(num1, src_bit, dest_bit);
+								decimal_to_binary(num1);
+
+								break;
+
+						case 8: break;
+
+						default:
+								printf("invalid choice\n");
+								break;
+					}
+
+					break;
+			case 15: 
 					run = 0;
 					break;
 

@@ -5,12 +5,55 @@
 
 #define true 1
 #define false 0
+
 #define SIZE 256
 #define INT_BITS 32
+
 #define MASK(n) ~(~0 << n)
+
 #define ODD_TOGGLE 0x55555555
 #define EVEN_TOGGLE 0xAAAAAAAA
+
 #define BIT_TEST(num, pos) ((num >> pos) & 1) ? true : false
+
+#define MAX(num1, num2) ((num1 - num2) & 0x80000000) ? num2 : num1
+#define MIN(num1, num2) ((num1 - num2) & 0x80000000) ? num1 : num2
+
+#define CLEAR_RIGHTMOST_BIT(num) (BIT_TEST(num, 0)) ? (num & ((~0) << 1)) : num
+#define CLEAR_LEFTMOST_BIT(num) (BIT_TEST(num, 31)) ? (num ^ (1 << 31)) : num
+
+#define SET_RIGHTMOST_BIT(num) (BIT_TEST(num, 0)) ? num : (num | 0x1)
+#define SET_LEFTMOST_BIT(num) (BIT_TEST(num, 31)) ? num : (num | 0x80000000)
+
+#define SET_BITS(num, src, dest) \
+		{ \
+			if(src > dest) \
+				num = (MASK(src - dest + 1) << dest); \
+			else if(dest > src) \
+				num = (MASK(dest - src + 1) << src); \
+			else \
+				num = (1 << src); \
+		}
+		
+#define CLEAR_BITS(num, src, dest) \
+		{ \
+			if(src > dest) \
+				num = ~(MASK(src - dest + 1) << dest); \
+			else if(dest > src) \
+				num = ~(MASK(dest - src + 1) << src); \
+			else \
+				num = ~(1 << src); \
+		}
+
+#define TOGGLE_BITS(num, src, dest) \
+		{ \
+			if(src > dest) \
+				num = num ^ (MASK(src - dest + 1) << dest); \
+			else if(dest > src) \
+				num = num ^ (MASK(dest - src + 1) << src); \
+			else \
+				num = num ^ (1 << src); \
+		}
 
 typedef unsigned int uint;
 
