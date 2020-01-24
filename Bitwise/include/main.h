@@ -59,6 +59,7 @@
 
 typedef unsigned int uint;
 
+int read_input(void);
 void decimal_to_binary(uint num);
 uint bit_swap(uint num, uint src, uint dest);
 void bit_swap_nums(uint *snum, uint *dnum, uint src_bit, uint dest_bit);

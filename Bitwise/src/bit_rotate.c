@@ -24,7 +24,7 @@ uint right_rotate_n_bits(uint num, uint no_of_bits)
 uint right_rotate_bits(uint num)
 {
 	if(BIT_TEST(num, 0))
-		return (num >> 1) | 0x80000000;
+		return (num >> 1) | (1 << 31);
 
 	return num >> 1;
 }
