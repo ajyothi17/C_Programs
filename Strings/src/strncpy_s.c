@@ -1,8 +1,8 @@
 #include "main.h"
 
-char* strncpy_s(char* src, char* dest, int no_of_char)
+char* strncpy_s(char* src, char* dest, uint no_of_char)
 {
-	int len = 0;
+	uint len = 0;
 	int index = 0;
 	
 	if(NULL == src)
@@ -12,7 +12,7 @@ char* strncpy_s(char* src, char* dest, int no_of_char)
 	}
 	
 	len = strlen_s(src);
-	
+
 	if((no_of_char < 0) || (no_of_char > len))
 	{
 		printf("invalid input\n");
