@@ -25,6 +25,8 @@
 #define SET_RIGHTMOST_BIT(num) (BIT_TEST(num, 0)) ? num : (num | 0x1)
 #define SET_LEFTMOST_BIT(num) (BIT_TEST(num, 31)) ? num : (num | 0x80000000)
 
+#define GET_BITS(num, pos, no_of_bits) (num >> pos) & (MASK(no_of_bits))
+
 #define SET_BITS(num, src, dest) \
 		{ \
 			if(src > dest) \
@@ -73,4 +75,6 @@ uint count_leading_set_bits(uint num);
 uint count_trailing_set_bits(uint num);
 uint count_leading_clear_bits(uint num);
 uint count_trailing_clear_bits(uint num);
+uint setbits(uint num1, uint num2, uint pos, uint no_of_bits);
+uint invertbits(uint num1, uint pos, uint no_of_bits);
 #endif
