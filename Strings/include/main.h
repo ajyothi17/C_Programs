@@ -16,4 +16,6 @@ char* sappend(char* str1, char* str2);
 char* snappend(char* str1, char* str2, int no_of_chars);
 int strcmp_s(char* str1, char* str2);
 int strspn_s(char* str, char* accept);
+char* strtok_s(char* str, const char* delim);
+char* reverse_str(char* str, char* rev_str);
 #endif

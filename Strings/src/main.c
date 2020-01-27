@@ -19,7 +19,8 @@ int main(void)
 			   "4. strcmp_s()\n"
 			   "5. strspn_s()\n"
 			   "6. strtok_s()\n"
-			   "7. exit\n"
+			   "7. reverse_str()\n"
+			   "8. exit\n"
 			   "enter your choice: ");
 		
 		choice = read_input();
@@ -346,6 +347,47 @@ int main(void)
 					break;
 
 			case 7:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+					
+					if(NULL == (dest_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+					
+					printf("enter input string: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+					
+					dest_str = reverse_str(src_str, dest_str);
+					
+					if(NULL != dest_str)
+					{
+						printf("reversed string : %s\n", dest_str);
+					}
+					else
+					{
+						printf("reverse_str() failed\n");
+					}
+					
+					free(src_str);
+					src_str = NULL;
+					
+					free(dest_str);
+					dest_str = NULL;
+					
+					break;
+					
+			case 8:
 					run = 0;
 					break;
 
