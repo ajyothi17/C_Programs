@@ -8,13 +8,15 @@ int main(void)
 	int run = 1;
 	int choice = 0;
 	int len = 0;
+	int ret = 0;
 
 	while(run)
 	{
 		printf("1. strncpy_s()\n"
 			   "2. sappend()\n"
 			   "3. snappend()\n"
-			   "4. exit\n"
+			   "4. strcmp()\n"
+			   "5. exit\n"
 			   "enter your choice: ");
 		
 		choice = read_input();
@@ -108,6 +110,12 @@ int main(void)
 					{
 						printf("sappend() failed\n");
 					}
+					
+					free(src_str);
+					src_str = NULL;
+
+					free(dest_str);
+					dest_str = NULL;
 
 					break;
 
@@ -158,9 +166,76 @@ int main(void)
 						printf("sappend() failed\n");
 					}
 
+					free(src_str);
+					src_str = NULL;
+
+					free(dest_str);
+					dest_str = NULL;
+
 					break;
 
 			case 4:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					if(NULL == (dest_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					printf("enter input string1: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+
+					printf("enter input string2: ");
+					if(NULL == fgets(dest_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(dest_str);
+					dest_str[len - 1] = '\0';
+
+					ret = strcmp_s(src_str, dest_str);
+
+					if(0 == ret)
+					{
+						printf("given strings are equal\n");
+					}
+
+					else if(1 == ret)
+					{
+						printf("%s is greater than %s\n", src_str, dest_str);
+					}
+
+					else if(-1 == ret)
+					{
+						printf("%s is greater than %s\n", dest_str, src_str);
+					}
+
+					else
+					{
+						printf("strcmp_s() failed\n");
+					}
+
+					free(src_str);
+					src_str = NULL;
+
+					free(dest_str);
+					dest_str = NULL;
+
+					break;
+
+			case 5:
 					run = 0;
 					break;
 

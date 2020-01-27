@@ -13,4 +13,5 @@ uint strlen_s(char *str);
 char* strncpy_s(char* src, char* dest, uint no_of_char);
 char* sappend(char* str1, char* str2);
 char* snappend(char* str1, char* str2, int no_of_chars);
+int strcmp_s(char* str1, char* str2);
 #endif
