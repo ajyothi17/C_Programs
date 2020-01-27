@@ -4,12 +4,13 @@ int main(void)
 {
 	char* src_str = NULL;
 	char* dest_str = NULL;
+	char* token = NULL;
 	int no_of_chars = 0;
 	int run = 1;
 	int choice = 0;
 	int len = 0;
 	int ret = 0;
-
+	
 	while(run)
 	{
 		printf("1. strncpy_s()\n"
@@ -17,7 +18,8 @@ int main(void)
 			   "3. snappend_s()\n"
 			   "4. strcmp_s()\n"
 			   "5. strspn_s()\n"
-			   "6. exit\n"
+			   "6. strtok_s()\n"
+			   "7. exit\n"
 			   "enter your choice: ");
 		
 		choice = read_input();
@@ -286,7 +288,64 @@ int main(void)
 					dest_str = NULL;
 
 					break;
+
 			case 6:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					if(NULL == (dest_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					printf("enter input string: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+
+					printf("enter the delimiter: ");
+					if(NULL == fgets(dest_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(dest_str);
+					dest_str[len - 1] = '\0';
+
+					if(NULL == (token = (char*)malloc(sizeof(char) * SIZE)))
+					{
+						printf("malloc() failed\n");
+						return EXIT_FAILURE;
+					}
+
+					token = strtok(src_str, dest_str);
+
+					while(token != NULL)
+					{
+						printf("token - %s\n", token);
+						token = strtok(NULL, dest_str);
+					}
+
+					free(src_str);
+					src_str = NULL;
+
+					free(dest_str);
+					dest_str = NULL;
+
+					free(token);
+					token = NULL;
+
+					break;
+
+			case 7:
 					run = 0;
 					break;
 
