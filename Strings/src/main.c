@@ -13,10 +13,11 @@ int main(void)
 	while(run)
 	{
 		printf("1. strncpy_s()\n"
-			   "2. sappend()\n"
-			   "3. snappend()\n"
-			   "4. strcmp()\n"
-			   "5. exit\n"
+			   "2. sappend_s()\n"
+			   "3. snappend_s()\n"
+			   "4. strcmp_s()\n"
+			   "5. strspn_s()\n"
+			   "6. exit\n"
 			   "enter your choice: ");
 		
 		choice = read_input();
@@ -236,6 +237,56 @@ int main(void)
 					break;
 
 			case 5:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					if(NULL == (dest_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					printf("enter input string: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+
+					printf("enter accept string: ");
+					if(NULL == fgets(dest_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(dest_str);
+					dest_str[len - 1] = '\0';
+					
+					ret = strspn_s(src_str, dest_str);
+
+					if(-1 != ret)
+					{
+						printf("no of matching chars %d\n", ret);
+					}
+
+					else
+					{
+						printf("strspn_s() failed\n");
+					}
+
+					free(src_str);
+					src_str = NULL;
+
+					free(dest_str);
+					dest_str = NULL;
+
+					break;
+			case 6:
 					run = 0;
 					break;
 
