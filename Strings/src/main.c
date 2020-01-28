@@ -13,14 +13,16 @@ int main(void)
 	
 	while(run)
 	{
-		printf("1. strncpy_s()\n"
-			   "2. sappend_s()\n"
-			   "3. snappend_s()\n"
-			   "4. strcmp_s()\n"
-			   "5. strspn_s()\n"
-			   "6. strtok_s()\n"
-			   "7. reverse_str()\n"
-			   "8. exit\n"
+		printf("1. strncpy_s() - copy str1 to str2\n"
+			   "2. sappend_s() - append str2 to str1\n"
+			   "3. snappend_s() - append n chars from str2 to str1\n"
+			   "4. strcmp_s() - compare two given strings\n"
+			   "5. strspn_s() - to count the initial set of chars in str1, matches any of char in str2\n"
+			   "6. strtok_s() - return the token split by delimiter\n"
+			   "7. reverse_str() - to reverse the given str\n"
+			   "8. squeeze_str() - to squeeze the repeating chars in str\n"
+			   "9. strrot() - to check whether rstr is rotated str of str\n"
+			   "10. exit\n"
 			   "enter your choice: ");
 		
 		choice = read_input();
@@ -327,7 +329,7 @@ int main(void)
 						return EXIT_FAILURE;
 					}
 
-					token = strtok(src_str, dest_str);
+					token = strtok_s(src_str, dest_str);
 
 					while(token != NULL)
 					{
@@ -386,8 +388,96 @@ int main(void)
 					dest_str = NULL;
 					
 					break;
-					
+				
 			case 8:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+					
+					printf("enter input string: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+					
+					src_str = squeeze_str(src_str);
+					
+					if(NULL != src_str)
+					{
+						printf("str - %s\n", src_str);
+					}
+					else
+					{
+						printf("squeeze_str() failed\n");
+					}
+					
+					free(src_str);
+					src_str = NULL;
+					
+					break;
+			
+			case 9:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					if(NULL == (dest_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					printf("enter input string: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+
+					printf("enter the rotated string: ");
+					if(NULL == fgets(dest_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(dest_str);
+					dest_str[len - 1] = '\0';
+
+					ret = strrot_s(src_str, dest_str);
+					
+					if(!ret)
+					{
+						printf("given %s is a rotated str of %s\n", dest_str, src_str);
+					}
+					
+					else if(1 == ret)
+					{
+						printf("given %s is not a rotated str of %s\n", dest_str, src_str);
+					}
+					
+					else
+					{
+						printf("strrot_s() failed\n");
+					}
+					
+					free(src_str);
+					src_str = NULL;
+					
+					free(dest_str);
+					dest_str == NULL;
+					
+					break;
+					
+			case 10:
 					run = 0;
 					break;
 

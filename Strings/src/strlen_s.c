@@ -1,6 +1,6 @@
 #include "main.h"
 
-uint strlen_s(char *str)
+uint strlen_s(const char *str)
 {
 	int len = 0;
 
