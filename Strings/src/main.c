@@ -10,6 +10,11 @@ int main(void)
 	int choice = 0;
 	int len = 0;
 	int ret = 0;
+	int pos = -1;
+	int index = 0;
+	int size = 0;
+	int arr[SIZE];
+	char ch = '\0';
 	
 	while(run)
 	{
@@ -22,7 +27,11 @@ int main(void)
 			   "7. reverse_str() - to reverse the given str\n"
 			   "8. squeeze_str() - to squeeze the repeating chars in str\n"
 			   "9. strrot() - to check whether rstr is rotated str of str\n"
-			   "10. exit\n"
+			   "10. remsstr_s() - to remove sstr from str\n"
+			   "11. insertchar() - to insert a char at given pos\n"
+			   "12. check_consecutive_ones() - to check for consecutive ones in a given number\n"
+			   "13. vertical_histogram() - print the given string in vertical histogram\n"
+			   "14. exit\n"
 			   "enter your choice: ");
 		
 		choice = read_input();
@@ -478,6 +487,151 @@ int main(void)
 					break;
 					
 			case 10:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					if(NULL == (dest_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+	
+					printf("enter input string: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+					
+					printf("enter the string to be removed: ");
+					if(NULL == fgets(dest_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					dest_str[len - 1] = '\0';
+					
+					src_str = remsstr_s(src_str, dest_str);
+					
+					if(NULL != src_str)
+					{
+						printf("string - %s\n", src_str);
+					}
+					
+					else
+					{
+						printf("remsstr() failed\n");
+					}
+					
+					free(src_str);
+					src_str = NULL;
+					
+					free(dest_str);
+					dest_str = NULL;
+					
+					break;
+					
+			case 11:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+					
+					printf("enter input string: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+					
+					printf("enter char to be inserted: ");
+					if(EOF == (ch = fgetc(stdin)))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					
+					printf("enter the position to be inserted: ");
+					pos = read_input();
+					
+					src_str = insert_char(src_str, ch, pos);
+					
+					if(NULL != src_str)
+					{
+						printf("string - %s\n", src_str);
+					}
+					
+					else
+					{
+						printf("insert_char() failed\n");
+					}
+					
+					free(src_str);
+					src_str = NULL;
+					
+					break;
+					
+			case 12:
+					printf("enter the size of array:");
+					size = read_input();
+					
+					printf("enter array elements:\n");
+					for(index = 0; index < size; index++)
+					{
+						arr[index] = read_input();
+						if((0 != arr[index]) && (1 != arr[index]))
+						{
+							printf("invalid array input\n");
+							return EXIT_FAILURE;
+						}
+					}
+					
+					ret = check_consecutive_ones(arr, size);
+					
+					if(0 == ret)
+						printf("given array contains consecutive ones\n");
+					
+					else if(1 == ret)
+						printf("given array doesnot contain consecutive ones\n");
+					
+					else
+						printf("check_consecutive_ones() failed\n");
+					
+					break;
+					
+			case 13:
+					if(NULL == (src_str = (char*)malloc(sizeof(char*) * SIZE)))
+					{
+						printf("no space available\n");
+						return EXIT_FAILURE;
+					}
+					
+					printf("enter input string: ");
+					if(NULL == fgets(src_str, SIZE, stdin))
+					{
+						printf("reading input failed\n");
+						return EXIT_FAILURE;
+					}
+					len = strlen_s(src_str);
+					src_str[len - 1] = '\0';
+
+					ret = vertical_histogram(src_str);
+					
+					if(ret)
+						printf("vertical_histogram() failed\n");
+					
+					break;
+					
+			case 14:
 					run = 0;
 					break;
 
@@ -487,7 +641,6 @@ int main(void)
 
 		}
 	}
-
 
 	return EXIT_SUCCESS;
 }
