@@ -9,6 +9,11 @@ char* strtok_s(char* str, const char* delim)
 	int len = 0;
 	int flag = 0;
 	
+	if(((NULL == src) && (NULL == str)) || (NULL == delim))
+	{
+		return NULL;
+	}
+	
  	if(NULL == src)
 	{
 		if(NULL != str)
@@ -19,31 +24,47 @@ char* strtok_s(char* str, const char* delim)
 	{
 		str = src;
 	}
-
-	len = strlen_s(delim);
-	while('\0' != str[index1])
+	
+	
+	while('\0' != src[index1])
 	{
 		index2 = 0;
-		if(str[index1] == delim[index2])
+		
+		while('\0' != delim[index2])
 		{
-			while(++index2 < len)
+			if(src[index1] != delim[index2])
 			{
-				if(str[index1 + index2] != delim[index2])
-					break;
-				
-				flag = 1;
+				index2++;
+			}
+			
+			else
+			{
+				break;
 			}
 		}
 		
-		if(1 == flag)
+		if((0 == index1) && ('\0' != delim[index2]) && (src[index1] == delim[index2]))
 		{
-			src = (str + index1 + index2);
-			str[index1 + index2] = '\0';
+			str[index1] = '\0';
+			src = src + index1 + 1;
+			str = src;
+		}
+		
+		else if(('\0' != delim[index2]) && (src[index1] == delim[index2]))
+		{
+			str[index1] = '\0';
+			src = src + index1 + 1;
 			return str;
 		}
 		
 		index1++;
 	}
 	
+	if('\0' == src[index1])
+	{
+		src = NULL;
+		return str;
+	}
+			
 	return NULL;
 }

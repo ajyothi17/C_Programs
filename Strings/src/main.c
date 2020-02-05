@@ -343,7 +343,7 @@ int main(void)
 					while(token != NULL)
 					{
 						printf("token - %s\n", token);
-						token = strtok(NULL, dest_str);
+						token = strtok_s(NULL, dest_str);
 					}
 
 					free(src_str);
