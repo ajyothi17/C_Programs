@@ -47,8 +47,7 @@ int main(void)
 		handle_error("inet_ntop() failed");
 	}
 
-	printf("connection accepted\n"
-		   "request accepted to client %s on port %d\n", clt_addr, htons(srvr_addr.sin_port));
+	printf("connection accepted\n");
 
 	if(NULL == (buf = (char*)malloc(sizeof(char*) * SIZE)))
 	{
