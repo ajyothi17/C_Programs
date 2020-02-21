@@ -37,25 +37,22 @@ int main(void)
 		handle_error("malloc() failed");
 	}
 
-	while(true)
+	if(NULL == fgets(buf, SIZE, stdin))
 	{
-		if(NULL == fgets(buf, SIZE, stdin))
-		{
-			handle_error("fgets() failed");
-		}
-
-		if(-1 == write(clt_fd, buf, SIZE))
-		{
-			handle_error("write() failed");
-		}
-
-		if(-1 == read(clt_fd, buf, SIZE))
-		{
-			handle_error("read() failed");
-		}
-
-		printf("msg received from server - %s\n", buf);
+		handle_error("fgets() failed");
 	}
+
+	if(-1 == write(clt_fd, buf, SIZE))
+	{
+		handle_error("write() failed");
+	}
+
+	if(-1 == read(clt_fd, buf, SIZE))
+	{
+		handle_error("read() failed");
+	}
+
+	printf("msg received from server - %s\n", buf);
 	
 	if(close(clt_fd))
 	{

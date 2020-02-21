@@ -3,7 +3,6 @@
 int main(void)
 {
 	int srvr_fd = -1;
-	char *clt_addr = NULL;
 	char *buf = NULL;
 
 	struct sockaddr_in srvr_addr;
@@ -37,16 +36,6 @@ int main(void)
 		handle_error("accept() failed");
 	}
 
-	if(NULL == (clt_addr = (char*)malloc(sizeof(char*) * SIZE)))
-	{
-		handle_error("malloc() failed");
-	}
-
-	if(NULL == inet_ntop(AF_INET, &srvr_addr, clt_addr, srvr_addrlen))
-	{
-		handle_error("inet_ntop() failed");
-	}
-
 	printf("connection accepted\n");
 
 	if(NULL == (buf = (char*)malloc(sizeof(char*) * SIZE)))
@@ -54,33 +43,27 @@ int main(void)
 		handle_error("malloc() failed");
 	}
 
-	while(true)
+    if(-1 == read(srvr_fd, buf, SIZE))
     {
-        if(-1 == read(srvr_fd, buf, SIZE))
-        {
-            handle_error("read() failed");
-        }
-
-        printf("msg received from client - %s\n", buf);
-
-        if(NULL == fgets(buf, SIZE, stdin))
-        {
-            handle_error("fgets() failed");
-        }
-
-        if(-1 == write(srvr_fd, buf, SIZE))
-        {
-            handle_error("write() failed");
-        }
+        handle_error("read() failed");
     }
 
+    printf("msg received from client - %s\n", buf);
+
+    if(NULL == fgets(buf, SIZE, stdin))
+    {
+        handle_error("fgets() failed");
+    }
+
+    if(-1 == write(srvr_fd, buf, SIZE))
+    {
+        handle_error("write() failed");
+    }
+    
     if(close(srvr_fd))
     {
         handle_error("close() failed");
     }
-
-	free(clt_addr);
-	clt_addr = NULL;
 
 	free(buf);
 	buf = NULL;
