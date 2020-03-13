@@ -50,12 +50,7 @@ int main(void)
 
     printf("msg received from client - %s\n", buf);
 
-    if(NULL == fgets(buf, SIZE, stdin))
-    {
-        handle_error("fgets() failed");
-    }
-
-    if(-1 == write(srvr_fd, buf, SIZE))
+    if(-1 == write(srvr_fd, "Hi Client!", SIZE))
     {
         handle_error("write() failed");
     }

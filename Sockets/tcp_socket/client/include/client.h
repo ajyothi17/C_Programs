@@ -17,7 +17,7 @@
 
 #define SIZE 256
 #define ETH_INTERFACE "eth0"
-#define PORT 64403
+#define PORT 1303
 #define SERVER_IP "10.63.33.134"
 
 #define handle_error(msg) \

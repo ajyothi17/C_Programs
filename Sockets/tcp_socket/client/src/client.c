@@ -34,15 +34,10 @@ int main(void)
 
 	if(NULL == (buf = (char*)malloc(sizeof(char*) * SIZE)))
 	{
-		handle_error("malloc() failed");
+		handle_error("malloc() failed\n");
 	}
 
-	if(NULL == fgets(buf, SIZE, stdin))
-	{
-		handle_error("fgets() failed");
-	}
-
-	if(-1 == write(clt_fd, buf, SIZE))
+	if(-1 == write(clt_fd, "Hi Server!", SIZE))
 	{
 		handle_error("write() failed");
 	}
