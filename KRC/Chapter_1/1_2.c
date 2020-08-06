@@ -1,3 +1,7 @@
+/*
+ * Experiment on \b, \t, \n and \c
+ */
+
 #include <stdio.h>
 
 int main(void)
